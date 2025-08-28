@@ -22,7 +22,7 @@ int main(void)
     int i;
     int j;
     
-    //SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480),120000000); 
+    SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480),120000000); 
     // Enable, configure system clock
     
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
@@ -51,11 +51,11 @@ int main(void)
     {
       if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_0)==0) && (bin!=15)) {
         bin+=1;
-        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++) {}
+        for(ui32Loop = 0; ui32Loop < 2000000; ui32Loop++) {}
       }
       if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_1)==0) && (bin!=0)) {
         bin-=1;
-        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++) {}
+        for(ui32Loop = 0; ui32Loop < 2000000; ui32Loop++) {}
       }
       
       if (binAnt!=bin){
