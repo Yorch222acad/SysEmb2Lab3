@@ -1,27 +1,3 @@
-//*****************************************************************************
-//
-// blinky.c - Simple example to blink the on-board LED.
-//
-// Copyright (c) 2013-2020 Texas Instruments Incorporated.  All rights reserved.
-// Software License Agreement
-// 
-// Texas Instruments (TI) is supplying this software for use solely and
-// exclusively on TI's microcontroller products. The software is owned by
-// TI and/or its suppliers, and is protected under applicable copyright
-// laws. You may not combine this software with "viral" open-source
-// software in order to form a larger program.
-// 
-// THIS SOFTWARE IS PROVIDED "AS IS" AND WITH ALL FAULTS.
-// NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT
-// NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. TI SHALL NOT, UNDER ANY
-// CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL
-// DAMAGES, FOR ANY REASON WHATSOEVER.
-// 
-// This is part of revision 2.2.0.295 of the EK-TM4C1294XL Firmware Package.
-//
-//*****************************************************************************
-
 #include <stdint.h>
 #include <stdbool.h>
 #include "inc/hw_memmap.h"
@@ -37,59 +13,9 @@ __error__(char *pcFilename, uint32_t ui32Line)
 }
 #endif
 
-// Ejemplo
-//*****************************************************************************
-/*
 int main(void)
 {
-    volatile uint32_t ui32Loop;
-
-    SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480),120000000); 
-    // Enable, configure system clock
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-    // Enable peripheral N-F
-
-    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPION))
-    {
-    }
-    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF))
-    {
-    }
-    // Check access availability of peripheral
-    
-    GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, 0x03); // Enable pin 0 and 1
-    GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, 0x11); // Enable pin 0 and 4
-
-    while(1)
-    {
-
-        GPIOPinWrite(GPIO_PORTN_BASE, 0x03, 0x02);
-        GPIOPinWrite(GPIO_PORTF_BASE, 0x11, 0x01);
-        // Turn on Led's
-        
-        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++)
-        {
-        }
-        // Delay
-        
-        GPIOPinWrite(GPIO_PORTN_BASE, 0x03, 0x02);
-        GPIOPinWrite(GPIO_PORTF_BASE, 0x11, 0x10);
-        // Turn off Led's
-        
-        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++)
-        {
-        }
-        // Delay
-    }
-}
-*/
-
-// Ejr3
-//*****************************************************************************
-int main(void)
-{
-    volatile uint32_t ui32Loop;
+    //volatile uint32_t ui32Loop;
     int bin = 0;
     int binAnt = 0;
     int l[4] = {0};
@@ -117,16 +43,16 @@ int main(void)
     
     GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, 0x03); // Enable pin 0 and 1
     GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, 0x11); // Enable pin 0 and 1
-    GPIOPinTypeGPIOInput(GPIO_PORTJ_BASE, 0x00);
+    GPIOPinTypeGPIOInput(GPIO_PORTJ_BASE, GPIO_PIN_0 | GPIO_PIN_1);
       GPIOPadConfigSet(GPIO_PORTJ_BASE,GPIO_PIN_0|GPIO_PIN_1,GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD_WPD);
       // Enable pin 0 and 1 as pull down
 
     while(1)
     {
-      if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_0)==1) && (bin!=8)) {
+      if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_0)==GPIO_PIN_0) && (bin!=8)) {
         bin+=1;
       }
-      if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_1)==1) && (bin!=0)) {
+      if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_1)==GPIO_PIN_1) && (bin!=0)) {
         bin-=1;
       }
       

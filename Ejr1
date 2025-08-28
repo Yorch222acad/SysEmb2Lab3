@@ -25,7 +25,7 @@ int main(void)
     while (!SysCtlPeripheralReady(SYSCTL_PERIPH_GPION)) {}
     while (!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF)) {}
 
-    GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+    GPIOPinTypeGPIOOutput(GPIO_PORTN_BAgitSE, GPIO_PIN_0 | GPIO_PIN_1);
     GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4);
 
     GPIOPinTypeGPIOInput(GPIO_PORTJ_BASE, GPIO_PIN_0 | GPIO_PIN_1);
