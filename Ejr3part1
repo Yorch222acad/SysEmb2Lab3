@@ -16,7 +16,7 @@ __error__(char *pcFilename, uint32_t ui32Line)
 int main(void)
 {
     volatile uint32_t ui32Loop;
-    int bin = 0;
+    int counter = 0;
     int binAnt = 0;
     int l[4] = {0};
     int i;
@@ -49,20 +49,20 @@ int main(void)
 
     while(1)
     {
-      if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_0)==0) && (bin!=15)) {
-        bin+=1;
+      if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_0)==0) && (counter!=15)) {
+        counter+=1;
         for(ui32Loop = 0; ui32Loop < 2000000; ui32Loop++) {}
       }
-      if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_1)==0) && (bin!=0)) {
-        bin-=1;
+      if ((GPIOPinRead(GPIO_PORTJ_BASE, GPIO_PIN_1)==0) && (counter!=0)) {
+        counter-=1;
         for(ui32Loop = 0; ui32Loop < 2000000; ui32Loop++) {}
       }
       
-      if (binAnt!=bin){
+      if (binAnt!=counter){
         for(i=0; i<4; i++) {
           l[i]=0;
         }
-        for(i=0; i<bin; i++){
+        for(i=0; i<counter; i++){
           for (j=3; j >= 0; j--) {
               if (l[j] == 0) {
                   l[j] = 1;      // pongo un 1 donde encuentro el primer 0
@@ -72,7 +72,7 @@ int main(void)
               }
           }
         }
-        binAnt=bin;
+        binAnt=counter;
       }
 
       if (l[0]==1){
